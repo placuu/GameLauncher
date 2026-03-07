@@ -3,4 +3,6 @@
     <SolidColorBrush x:Key="PrimaryBackground" Color="#1E1E1E"/>
     <SolidColorBrush x:Key="PrimaryText" Color="white"/>
     <SolidColorBrush x:Key="AccentColor" Color="#007ACC"/>
+    <SolidColorBrush x:Key="GamesBackground" Color="#2D2D2D"/>
+    <SolidColorBrush x:Key="BorderColor" Color="#3E3E3E"/>
 </ResourceDictionary>

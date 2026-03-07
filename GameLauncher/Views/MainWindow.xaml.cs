@@ -16,11 +16,14 @@ namespace GameLauncher.Views
     /// </summary>
     public partial class MainWindow : Window
     {
+        private GameLauncher.ViewModels.MainViewModel _viewModel;
+
         public MainWindow()
         {
             InitializeComponent();
 
-            DataContext = new GameLauncher.ViewModels.MainViewModel();
+            _viewModel = new GameLauncher.ViewModels.MainViewModel();
+            DataContext = _viewModel;
         }
 
         public void AddGame_Click(object sender, RoutedEventArgs e)
@@ -34,7 +37,9 @@ namespace GameLauncher.Views
         { 
             var settingsWin = new SettingsWindow();
             settingsWin.Owner = this;
+            settingsWin.DataContext = _viewModel;  //suwak zmianai sie z w oknie glownym
             settingsWin.ShowDialog();
         }
+
     }
 }

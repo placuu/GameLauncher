@@ -5,18 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameLauncher.Views"
         mc:Ignorable="d"
-        Title="Dodaj grę" Height="450" Width="800"    Background="#1E1E1E"
+        Title="Dodaj grę" Height="450" Width="800"    Background="{DynamicResource PrimaryBackground}"
         Icon="/Assets/app_icon.png" WindowStartupLocation="CenterOwner">
         
     <Grid>
         <StackPanel Margin="20">
-            <TextBlock Text="Dodaj nową grę" Foreground="White" FontSize="20" FontWeight="Bold"/>
+            <TextBlock Text="Dodaj nową grę" Foreground="{DynamicResource PrimaryText}" FontSize="20" FontWeight="Bold"/>
 
             <TextBlock Text="Tytuł gry:" Foreground="#AAAAAA" Margin="0 10 0 5"/>
-            <TextBox Height="30" Background="#2D2D2D" Foreground="White" BorderBrush="#3E3E3E"/>
+            <TextBox Height="30" Background="{DynamicResource GamesBackground}" Foreground="{DynamicResource PrimaryText}" BorderBrush="{DynamicResource BorderColor}"/>
 
             <TextBlock Text="Opis gry:" Foreground="#AAAAAA" Margin="0 10 0 5"/>
-            <TextBox Height="30" Background="#2D2D2D" Foreground="White" BorderBrush="#3E3E3E"/>
+            <TextBox Height="30" Background="{DynamicResource GamesBackground}" Foreground="{DynamicResource PrimaryText}" BorderBrush="{DynamicResource BorderColor}"/>
 
             <TextBlock Text="Ścieżka do pliku (.exe):" Foreground="#AAAAAA" Margin="0 10 0 5"/>
             <Grid>
@@ -24,7 +24,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBox Height="30" Background="#2D2D2D" Foreground="White" BorderBrush="#3E3E3E"/>
+                <TextBox Height="30" Background="{DynamicResource GamesBackground}" Foreground="{DynamicResource PrimaryText}" BorderBrush="{DynamicResource BorderColor}"/>
                 <Button Grid.Column="1" Content="Przeglądaj..." Width="80" Margin="0 0 0 0"/>
             </Grid>
 

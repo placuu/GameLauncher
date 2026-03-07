@@ -28,6 +28,24 @@ namespace GameLauncher.Views
         {
             this.Close();
         }
+
+        private void ThemeToggle_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;   //Pobranie checkboxa
+
+            bool isLightMode = checkBox.IsChecked ?? false; // Sprawdzanie czy zaznaczony
+
+            string themePath = isLightMode ? "Themes/LightTheme.xaml" : "Themes/DarkTheme.xaml";
+
+            ResourceDictionary newTheme = new ResourceDictionary()  //Tworzenie nowego słownika zasobów
+            {
+                Source = new Uri(themePath, UriKind.Relative)
+            };
+
+            Application.Current.Resources.MergedDictionaries.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(newTheme);
+        }
+
     }
 
 }
