@@ -46,6 +46,20 @@ namespace GameLauncher.Views
             Application.Current.Resources.MergedDictionaries.Add(newTheme);
         }
 
+        private void ResetSizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.Owner != null) 
+            {
+                this.Owner.Width = 1280;
+                this.Owner.Height = 720;
+
+                //Wyrównanie na srodek ekranu
+                this.Owner.Left = (SystemParameters.PrimaryScreenWidth - this.Owner.Width) / 2;
+                this.Owner.Top = (SystemParameters.PrimaryScreenHeight -  this.Owner.Height) / 2;
+
+                this.Owner.WindowState = WindowState.Normal; //Wyłącznie fullscreena jesli jest włączony
+            }
+        }
     }
 
 }
