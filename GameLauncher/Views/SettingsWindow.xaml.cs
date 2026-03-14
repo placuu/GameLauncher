@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Reflection; //auto start
+using Microsoft.Win32;  //auto start
 
 namespace GameLauncher.Views
 {
@@ -58,6 +60,24 @@ namespace GameLauncher.Views
                 this.Owner.Top = (SystemParameters.PrimaryScreenHeight -  this.Owner.Height) / 2;
 
                 this.Owner.WindowState = WindowState.Normal; //Wyłącznie fullscreena jesli jest włączony
+            }
+        }
+
+        private void AutoStartCheck_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox cb = (CheckBox)sender;
+
+            string runKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
+            RegistryKey key = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Default).OpenSubKey(runKey,true);
+
+            if(cb.IsChecked == true)
+            {
+                //dodanie wpisu do rejestru
+                key.SetValue("MyGameLauncher",$"\"{Assembly.GetExecutingAssembly().Location.Replace(".dll", ".exe")}\"");
+            }
+            else
+            {
+                key.DeleteValue("MyGameLauncher", false);
             }
         }
     }
