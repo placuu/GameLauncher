@@ -37,7 +37,7 @@
             <DockPanel>
                 <TextBlock Text="Uruchamiaj przy starcie systemu" Foreground="{DynamicResource PrimaryText}"/>
                 <CheckBox x:Name="AutoStartCheck" HorizontalAlignment="Right" 
-                          VerticalAlignment="Center" Cursor="Hand" Checked="AutoStartCheck_Checked"/>
+                          VerticalAlignment="Center" Cursor="Hand"/>
             </DockPanel>
             <Button x:Name="ResetSizeButton" Content="Resetuj rozmiar okna głównego" 
                     Height="30" Background="{DynamicResource GamesBackground}" Foreground="{DynamicResource PrimaryText}" 

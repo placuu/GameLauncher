@@ -25,6 +25,7 @@ namespace GameLauncher.Views
         private MainViewModel _viewModel;
         private bool _initialIsLightMode;
         private double _initialTileSize;
+        private bool _initialAutoStart;
 
         public SettingsWindow(MainViewModel viewModel)
         {
@@ -35,6 +36,10 @@ namespace GameLauncher.Views
 
             _initialIsLightMode = Properties.Settings.Default.IsDarkMode;
             _initialTileSize = Properties.Settings.Default.TileSize;
+            _initialAutoStart = Properties.Settings.Default.IsAutoStart;
+
+            ThemeToggle.IsChecked = _initialIsLightMode;
+            AutoStartCheck.IsChecked = _initialAutoStart;
 
             bool isLightMode = ThemeToggle.IsChecked ?? false;
             ApplyTheme(isLightMode);
@@ -61,9 +66,14 @@ namespace GameLauncher.Views
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            bool wantsAutoStart = AutoStartCheck.IsChecked ?? false;
+
+            Properties.Settings.Default.IsAutoStart = wantsAutoStart;
             Properties.Settings.Default.IsDarkMode = ThemeToggle.IsChecked ?? false;
             Properties.Settings.Default.TileSize = _viewModel.TileWidth;
             Properties.Settings.Default.Save();
+
+            UpdateRegistryAutoStart(wantsAutoStart);
 
             this.Close();
         }
@@ -92,21 +102,22 @@ namespace GameLauncher.Views
             }
         }
 
-        private void AutoStartCheck_Checked(object sender, RoutedEventArgs e)
+        private void UpdateRegistryAutoStart(bool enable)
         {
-            CheckBox cb = (CheckBox)sender;
-
             string runKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
             RegistryKey key = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Default).OpenSubKey(runKey,true);
 
-            if(cb.IsChecked == true)
+            if (key != null) 
             {
-                //dodanie wpisu do rejestru
-                key.SetValue("MyGameLauncher",$"\"{Assembly.GetExecutingAssembly().Location.Replace(".dll", ".exe")}\"");
-            }
-            else
-            {
-                key.DeleteValue("MyGameLauncher", false);
+                if (enable)
+                {
+                    string path = $"\"{System.Reflection.Assembly.GetExecutingAssembly().Location.Replace(".dll", ".exe")}\"";
+                    key.SetValue("MyGameLauncher", path);
+                }
+                else
+                {
+                    key.DeleteValue("MyGameLauncher", false);
+                }
             }
         }
 
