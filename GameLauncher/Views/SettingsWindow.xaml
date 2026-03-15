@@ -44,9 +44,9 @@
                     BorderBrush="#444" Cursor="Hand" Margin="0,10,0,0" Style="{StaticResource SecondaryButtonStyle}" Click="ResetSizeButton_Click"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
                         Margin="0,40,0,0">
-                <Button Content="ZAPISZ" Width="100" Height="30" Background="{DynamicResource AccentColor}"
+                <Button x:Name="SaveButton" Content="ZAPISZ" Width="100" Height="30" Background="{DynamicResource AccentColor}"
                         Foreground="White" FontWeight="Bold" Margin="0,0,10,0"
-                        Cursor="Hand" Style="{StaticResource PrimaryButtonStyle}"/>
+                        Cursor="Hand" Style="{StaticResource PrimaryButtonStyle}" Click="SaveButton_Click"/>
                 <Button x:Name="CancelButton" Content="ANULUJ" Width="100" Height="30"
                         Foreground="White" FontWeight="Bold" 
                         Cursor="Hand" Click="CancelButton_Click" 

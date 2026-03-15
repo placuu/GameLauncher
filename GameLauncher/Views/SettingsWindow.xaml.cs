@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Reflection; //auto start
 using Microsoft.Win32;  //auto start
+using GameLauncher.ViewModels;
 
 namespace GameLauncher.Views
 {
@@ -21,13 +22,49 @@ namespace GameLauncher.Views
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        public SettingsWindow()
+        private MainViewModel _viewModel;
+        private bool _initialIsLightMode;
+        private double _initialTileSize;
+
+        public SettingsWindow(MainViewModel viewModel)
         {
             InitializeComponent();
+
+            _viewModel = viewModel;
+            this.DataContext = _viewModel;
+
+            _initialIsLightMode = Properties.Settings.Default.IsDarkMode;
+            _initialTileSize = Properties.Settings.Default.TileSize;
+
+            bool isLightMode = ThemeToggle.IsChecked ?? false;
+            ApplyTheme(isLightMode);
+        }
+
+        private void ApplyTheme(bool isLightMode)
+        {
+            string themePath = isLightMode ? "Themes/LightTheme.xaml" : "Themes/DarkTheme.xaml";
+            ResourceDictionary newTheme = new ResourceDictionary()
+            {
+                Source = new Uri(themePath, UriKind.Relative)
+            };
+
+            Application.Current.Resources.MergedDictionaries.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(newTheme);
         }
 
         public void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+            ApplyTheme(_initialIsLightMode);
+            _viewModel.TileWidth = _initialTileSize;
+            this.Close();
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.IsDarkMode = ThemeToggle.IsChecked ?? false;
+            Properties.Settings.Default.TileSize = _viewModel.TileWidth;
+            Properties.Settings.Default.Save();
+
             this.Close();
         }
 
@@ -37,15 +74,7 @@ namespace GameLauncher.Views
 
             bool isLightMode = checkBox.IsChecked ?? false; // Sprawdzanie czy zaznaczony
 
-            string themePath = isLightMode ? "Themes/LightTheme.xaml" : "Themes/DarkTheme.xaml";
-
-            ResourceDictionary newTheme = new ResourceDictionary()  //Tworzenie nowego słownika zasobów
-            {
-                Source = new Uri(themePath, UriKind.Relative)
-            };
-
-            Application.Current.Resources.MergedDictionaries.Clear();
-            Application.Current.Resources.MergedDictionaries.Add(newTheme);
+            ApplyTheme(isLightMode);
         }
 
         private void ResetSizeButton_Click(object sender, RoutedEventArgs e)
@@ -80,6 +109,8 @@ namespace GameLauncher.Views
                 key.DeleteValue("MyGameLauncher", false);
             }
         }
+
+
     }
 
 }

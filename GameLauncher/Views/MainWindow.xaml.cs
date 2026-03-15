@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GameLauncher.ViewModels;
 
 namespace GameLauncher.Views
 {
@@ -35,9 +36,8 @@ namespace GameLauncher.Views
 
         public void Settings_Click(object sender, RoutedEventArgs e) 
         { 
-            var settingsWin = new SettingsWindow();
+            var settingsWin = new SettingsWindow((MainViewModel)this.DataContext);
             settingsWin.Owner = this;
-            settingsWin.DataContext = _viewModel;  //suwak zmianai sie z w oknie glownym
             settingsWin.ShowDialog();
         }
 
