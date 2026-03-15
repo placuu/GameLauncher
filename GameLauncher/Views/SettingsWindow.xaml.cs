@@ -105,14 +105,13 @@ namespace GameLauncher.Views
         private void UpdateRegistryAutoStart(bool enable)
         {
             string runKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
-            RegistryKey key = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Default).OpenSubKey(runKey,true);
+            RegistryKey key = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Default).OpenSubKey(runKey, true);
 
             if (key != null) 
             {
                 if (enable)
                 {
-                    string path = $"\"{System.Reflection.Assembly.GetExecutingAssembly().Location.Replace(".dll", ".exe")}\"";
-                    key.SetValue("MyGameLauncher", path);
+                    key.SetValue("MyGameLauncher", $"\"{Environment.ProcessPath}\"");
                 }
                 else
                 {
