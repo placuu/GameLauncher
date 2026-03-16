@@ -105,7 +105,7 @@ namespace GameLauncher.Views
         private void UpdateRegistryAutoStart(bool enable)
         {
             string runKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
-            RegistryKey key = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Default).OpenSubKey(runKey, true);
+            RegistryKey? key = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Default).OpenSubKey(runKey, true);
 
             if (key != null) 
             {

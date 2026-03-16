@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Windows;
+using GameLauncher.ViewModels;
 
 namespace GameLauncher
 {
@@ -24,7 +25,13 @@ namespace GameLauncher
             Application.Current.Resources.MergedDictionaries.Clear();
             Application.Current.Resources.MergedDictionaries.Add(newTheme);
 
+            var viewModel = new MainViewModel();
+
+            double savedSize = GameLauncher.Properties.Settings.Default.TileSize;
+            viewModel.TileWidth = savedSize > 0 ? savedSize : 120;
+
             var mainWindow = new GameLauncher.Views.MainWindow();
+            mainWindow.DataContext = viewModel;
             mainWindow.Show();
         }
     }
