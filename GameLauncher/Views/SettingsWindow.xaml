@@ -8,6 +8,7 @@
         Title="Ustawienie" Height="450" Width="800"  Background="{DynamicResource PrimaryBackground}"
         Icon="/Assets/app_icon.png"
         WindowStartupLocation="CenterOwner"
+        Closing="Window_Closing"
         >
         
     <Grid Margin="20">

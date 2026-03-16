@@ -27,6 +27,8 @@ namespace GameLauncher.Views
         private double _initialTileSize;
         private bool _initialAutoStart;
 
+        private bool _isSaved = false;
+
         public SettingsWindow(MainViewModel viewModel)
         {
             InitializeComponent();
@@ -66,6 +68,8 @@ namespace GameLauncher.Views
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            _isSaved = true;
+
             bool wantsAutoStart = AutoStartCheck.IsChecked ?? false;
 
             Properties.Settings.Default.IsAutoStart = wantsAutoStart;
@@ -76,6 +80,15 @@ namespace GameLauncher.Views
             UpdateRegistryAutoStart(wantsAutoStart);
 
             this.Close();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!_isSaved)
+            {
+                ApplyTheme(_initialIsLightMode);
+                _viewModel.TileWidth = _initialTileSize;
+            }
         }
 
         private void ThemeToggle_Checked(object sender, RoutedEventArgs e)
