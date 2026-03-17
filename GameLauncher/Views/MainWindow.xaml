@@ -35,14 +35,14 @@
             <ListBox Grid.Row="1" 
              ItemsSource="{Binding Games}" 
              Background="Transparent" BorderThickness="0"
-             Margin="10">
+             Margin="10" HorizontalContentAlignment="Center">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border Background="{DynamicResource GamesBackground}" 
                         CornerRadius="10" Margin="5" Padding="10" 
-                        Width="1000" 
+                        Width="1100" 
                         Height="{Binding DataContext.TileWidth, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                        MinHeight="70">
+                        MinHeight="70" HorizontalAlignment="Center">
 
                             <Grid>
                                 <Grid.ColumnDefinitions>
