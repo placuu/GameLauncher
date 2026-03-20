@@ -2,6 +2,7 @@
 using System.Data;
 using System.Windows;
 using GameLauncher.ViewModels;
+using GameLauncher.Data;
 
 namespace GameLauncher
 {
@@ -13,6 +14,11 @@ namespace GameLauncher
        protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            using (var db = new AppDbContext())
+            {
+                db.Database.EnsureCreated();
+            }
 
             bool isLightMode = GameLauncher.Properties.Settings.Default.IsDarkMode;
             string themePath = isLightMode ? "Themes/LightTheme.xaml" : "Themes/DarkTheme.xaml";

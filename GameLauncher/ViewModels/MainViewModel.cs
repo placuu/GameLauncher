@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using GameLauncher.Models;
+using GameLauncher.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameLauncher.ViewModels
 {
@@ -16,12 +19,16 @@ namespace GameLauncher.ViewModels
 
         public MainViewModel()
         {
-            Games = new ObservableCollection<Game>
+            LoadGames();
+        }
+
+        public void LoadGames()
+        {
+            using (var db = new AppDbContext())
             {
-                new Game {Title = "Wiedźmin 3: Dziki Gon", Description = "Epickie RPG w otwartym świecie."},
-                new Game {Title = "Cyberpunk 2077", Description = "Futurystyczne RPG o cyberprzestępcach."},
-                new Game {Title = "Terraria", Description = "Sandboxowa przygodowa gra survivalowa 2D."}
-            };
+                var gameList = db.Games.ToList();
+                Games = new ObservableCollection<Game>(gameList);
+            }
         }
     }
 }
