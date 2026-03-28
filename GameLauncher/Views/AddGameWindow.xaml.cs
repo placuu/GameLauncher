@@ -11,7 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GameLauncher.Data;
 using Microsoft.Win32;
+using GameLauncher.Models;
+using GameLauncher.ViewModels;
 
 namespace GameLauncher.Views
 {
@@ -20,9 +23,24 @@ namespace GameLauncher.Views
     /// </summary>
     public partial class AddGameWindow : Window
     {
-        public AddGameWindow()
+        private Game _gameEdit;
+        public AddGameWindow(Game? game = null)
         {
             InitializeComponent();
+            _gameEdit = game;
+
+            if(_gameEdit != null)
+            {
+                this.Title = "Edytuj grę";
+                TitleHeader.Text = "Edytuj dane gry";
+
+                TitleTextBox.Text = _gameEdit.Title;
+                DescriptionTextBox.Text = _gameEdit.Description;
+                ExePathTextBox.Text = _gameEdit.ExecutablePath;
+                ImagePathTextBox.Text = _gameEdit.ImagePath;
+
+                SaveButton.Content = "Zapisz zmiany";
+            }
         }
         public void BrowseExe_Click(object obj, RoutedEventArgs e)
         {
@@ -42,6 +60,41 @@ namespace GameLauncher.Views
             {
                 ImagePathTextBox.Text = openFileDialog.FileName;
             }
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            using (var db = new AppDbContext())
+            {
+                if (_gameEdit != null)
+                {
+                    var newGame = new Game
+                    {
+                        Title = TitleTextBox.Text,
+                        Description = DescriptionTextBox.Text,
+                        ExecutablePath = ExePathTextBox.Text,
+                        ImagePath = ImagePathTextBox.Text
+                    };
+
+                    db.Games.Add(newGame);
+                }
+                else
+                {
+                    var GameInDB = db.Games.Find(_gameEdit.Id);
+                    if (GameInDB != null)
+                    {
+                        GameInDB.Title = TitleTextBox.Text;
+                        GameInDB.Description = DescriptionTextBox.Text;
+                        GameInDB.ExecutablePath = ExePathTextBox.Text;
+                        GameInDB.ImagePath = ImagePathTextBox.Text;
+                    }
+                }
+                db.SaveChanges();
+            }
+                
+
+            ((MainViewModel)Application.Current.MainWindow.DataContext).LoadGames();    //odswiezenie listy gier w mianWindow
+            this.Close();
         }
     }
 }

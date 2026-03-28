@@ -10,13 +10,18 @@
 
     <Grid>
         <StackPanel Margin="20">
-            <TextBlock Text="Dodaj nową grę" Foreground="{DynamicResource PrimaryText}" FontSize="20" FontWeight="Bold"/>
+            <TextBlock x:Name="TitleHeader" Text="Dodaj nową grę" Foreground="{DynamicResource PrimaryText}" 
+                       FontSize="20" FontWeight="Bold"/>
 
             <TextBlock Text="Tytuł gry:" Foreground="#AAAAAA" Margin="0 10 0 5"/>
-            <TextBox Height="30" Background="{DynamicResource GamesBackground}" Foreground="{DynamicResource PrimaryText}" BorderBrush="{DynamicResource BorderColor}"/>
+            <TextBox x:Name="TitleTextBox" Height="30" Background="{DynamicResource GamesBackground}" 
+                     Foreground="{DynamicResource PrimaryText}" BorderBrush="{DynamicResource BorderColor}" FontSize="14"
+                     VerticalContentAlignment="Center"/>
 
             <TextBlock Text="Opis gry:" Foreground="#AAAAAA" Margin="0 10 0 5"/>
-            <TextBox Height="30" Background="{DynamicResource GamesBackground}" Foreground="{DynamicResource PrimaryText}" BorderBrush="{DynamicResource BorderColor}"/>
+            <TextBox x:Name="DescriptionTextBox" Height="30" Background="{DynamicResource GamesBackground}" 
+                     Foreground="{DynamicResource PrimaryText}" BorderBrush="{DynamicResource BorderColor}"
+                     VerticalContentAlignment="Center" FontSize="14"/>
 
             <TextBlock Text="Ścieżka do pliku (.exe):" Foreground="#AAAAAA" Margin="0 10 0 5"/>
             <Grid>
@@ -26,7 +31,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBox Height="30" Background="{DynamicResource GamesBackground}" Foreground="{DynamicResource PrimaryText}" 
                          BorderBrush="{DynamicResource BorderColor}" IsReadOnly="True"
-                         x:Name="ExePathTextBox"/>
+                         x:Name="ExePathTextBox" VerticalContentAlignment="Center" FontSize="14"/>
                 <Button Grid.Column="1" Content="Przeglądaj..." Width="80" Click="BrowseExe_Click" Height="30" VerticalAlignment="Top"/>
             </Grid>
             <TextBlock Text="Ścieżka do grafiki gry: " Foreground="#AAAAAA" Margin="0 10 0 5"/>
@@ -37,11 +42,12 @@
                 </Grid.ColumnDefinitions>
                 <TextBox Height="30" Background="{DynamicResource GamesBackground}" Foreground="{DynamicResource PrimaryText}" 
                          BorderBrush="{DynamicResource BorderColor}" IsReadOnly="True"
-                         x:Name="ImagePathTextBox"/>
+                         x:Name="ImagePathTextBox" VerticalContentAlignment="Center" FontSize="14"/>
                 <Button Grid.Column="1" Content="Przeglądaj..." Width="80" Margin="0 0 0 0" Click="BrowseImage_Click"/>
             </Grid>
 
-            <Button Content="Zapisz" Margin="200,30,200,0" Height="40" Style="{StaticResource PrimaryButtonStyle}" FontWeight="Bold" FontSize="15"/>
+            <Button Content="Zapisz" Margin="200,30,200,0" Height="40" Style="{StaticResource PrimaryButtonStyle}" FontWeight="Bold" FontSize="15" 
+                    Click="SaveButton_Click" x:Name="SaveButton"/>
         </StackPanel>
     </Grid>
 </Window>

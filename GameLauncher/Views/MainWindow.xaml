@@ -40,8 +40,8 @@
                     <DataTemplate>
                         <Border Background="{DynamicResource GamesBackground}" 
                         CornerRadius="10" Margin="5" Padding="10" 
-                        Width="1100" 
                         Height="{Binding DataContext.TileWidth, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                        Width="1100" 
                         MinHeight="70" HorizontalAlignment="Center">
 
                             <Grid>
@@ -51,13 +51,16 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Border Grid.Column="0" 
-                                Width="120" 
+                                Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" 
                                 VerticalAlignment="Stretch" 
                                 Background="{DynamicResource BorderColor}" 
                                 CornerRadius="5">
+                                    <Grid>
                                     <Viewbox Margin="10" Opacity="0.2">
                                         <Path Data="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" Fill="{DynamicResource PrimaryText}"/>
                                     </Viewbox>
+                                    <Image Source="{Binding ImagePath}" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    </Grid>
                                 </Border>
 
                                 <StackPanel Grid.Column="1" Margin="15,0,0,0" VerticalAlignment="Center">
@@ -73,8 +76,22 @@
                                     Margin="0,5,0,0"/>
                                 </StackPanel>
 
-                                <Button Grid.Column="2" Content="GRAJ" Width="80" Height="35" Style="{StaticResource PrimaryButtonStyle}" 
-                                        HorizontalAlignment="Right"/>
+                                <Grid Grid.Column="2" Margin="0 0 10 0">
+                                    <Button Width="40" Height="15" Style="{StaticResource SecondaryButtonStyle}" Margin="0 5" Cursor="Hand"
+                                            HorizontalAlignment="Right" VerticalAlignment="Top">
+                                        <Path Data="M96 320C96 289.1 121.1 264 152 264C182.9 264 208 289.1 208 320C208 350.9 182.9 376 152 376C121.1 376 96 350.9 96 320zM264 320C264 289.1 289.1 264 320 264C350.9 264 376 289.1 376 320C376 350.9 350.9 376 320 376C289.1 376 264 350.9 264 320zM488 264C518.9 264 544 289.1 544 320C544 350.9 518.9 376 488 376C457.1 376 432 350.9 432 320C432 289.1 457.1 264 488 264z"
+                                              Fill="{DynamicResource PrimaryText}" Stretch="Uniform" Width="10"/>
+                                        <Button.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="Edytuj" Click="EditGame_Click" Foreground="Black"/>
+                                                <MenuItem Header="Usuń" Click="DeleteGame_Click" Foreground="Red"/>
+                                            </ContextMenu>
+                                        </Button.ContextMenu>
+                                    </Button>
+                                    <Button Content="GRAJ" Width="80" Height="35" Style="{StaticResource PrimaryButtonStyle}" 
+                                            HorizontalAlignment="Right" Margin="0 5" VerticalAlignment="Center" Click="PlayButton_Click" Cursor="Hand"/>
+                                </Grid>
+                           
                             </Grid>
                         </Border>
                     </DataTemplate>
