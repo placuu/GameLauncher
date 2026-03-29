@@ -66,7 +66,7 @@ namespace GameLauncher.Views
         {
             using (var db = new AppDbContext())
             {
-                if (_gameEdit != null)
+                if (_gameEdit == null)
                 {
                     var newGame = new Game
                     {
