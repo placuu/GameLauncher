@@ -51,7 +51,8 @@ namespace GameLauncher.Views
 
             if (gameToDelete != null) 
             {
-                var result = MessageBox.Show($"Czy napewno chcesz usunąć {gameToDelete.Title}?","Potwierdzenie",MessageBoxButton.YesNo, MessageBoxImage.Question);
+                var result = MessageBox.Show($"Czy napewno chcesz usunąć {gameToDelete.Title}?","Potwierdzenie",MessageBoxButton.YesNo, 
+                    MessageBoxImage.Question);
                 
                 if (result == MessageBoxResult.Yes)
                 {
@@ -77,6 +78,7 @@ namespace GameLauncher.Views
             if(selectedGame != null)
             {
                 AddGameWindow editWindow = new AddGameWindow(selectedGame);
+                editWindow.Owner = this;
                 editWindow.ShowDialog();
             }
         }
