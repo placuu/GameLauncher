@@ -15,5 +15,6 @@ namespace GameLauncher.Models
         public string Description { get; set; } = string.Empty;
         public string ExecutablePath { get; set; } = string.Empty;
         public string ImagePath { get; set; } = string.Empty;
+        public TimeSpan TotalPlayTime { get; set; } = TimeSpan.Zero;
     }
 }

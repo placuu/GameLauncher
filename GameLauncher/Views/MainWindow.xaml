@@ -74,6 +74,10 @@
                                     FontSize="14"
                                     TextWrapping="Wrap"
                                     Margin="0,5,0,0"/>
+                                    <TextBlock Text="{Binding TotalPlayTime, StringFormat='Czas gry: {0:hh\\:mm}'}" 
+                                        Foreground="Gray" 
+                                        FontSize="12" 
+                                        Margin="5,0,0,0"/>
                                 </StackPanel>
 
                                 <Grid Grid.Column="2" Margin="0 0 10 0">
@@ -89,7 +93,8 @@
                                         </Button.ContextMenu>
                                     </Button>
                                     <Button Content="GRAJ" Width="80" Height="35" Style="{StaticResource PrimaryButtonStyle}" 
-                                            HorizontalAlignment="Right" Margin="0 5" VerticalAlignment="Center" Click="PlayButton_Click" Cursor="Hand"/>
+                                            HorizontalAlignment="Right" Margin="0 5" VerticalAlignment="Center" Click="PlayButton_Click" 
+                                            Cursor="Hand" FontWeight="Bold"/>
                                 </Grid>
                            
                             </Grid>

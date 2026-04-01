@@ -12,9 +12,15 @@ namespace GameLauncher.Data
     {
         public DbSet<Game> Games { get; set; }
 
+        public AppDbContext()
+        {
+            Database.EnsureCreated();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=games.db");
+            
         }
     }
 }

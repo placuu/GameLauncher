@@ -12,6 +12,7 @@ using GameLauncher.ViewModels;
 using GameLauncher.Data;
 using GameLauncher.Models;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace GameLauncher.Views
 {
@@ -83,7 +84,7 @@ namespace GameLauncher.Views
             }
         }
 
-        public void PlayButton_Click(object sender, RoutedEventArgs e)
+        public async void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as System.Windows.Controls.Button;
             var game = button?.DataContext as Game;
@@ -99,7 +100,41 @@ namespace GameLauncher.Views
                         UseShellExecute = true,
                     };
 
+                    string processName = System.IO.Path.GetFileNameWithoutExtension(game.ExecutablePath);
+                    DateTime startTime = DateTime.Now;
+
                     Process.Start(startInfo);
+
+                    Application.Current.MainWindow.WindowState = WindowState.Minimized;
+
+                    bool isRunning = true;
+                    while(isRunning)
+                    {
+                        await Task.Delay(5000);
+                        var processes = Process.GetProcessesByName(processName);
+                        if(processes.Length == 0)
+                        {
+                            isRunning = false;
+                        }
+                    }
+
+                    TimeSpan sessionDuration = DateTime.Now - startTime;
+
+                    using (var db = new AppDbContext())
+                    {
+                        var gameInDb = db.Games.Find(game.Id);
+                        if (gameInDb != null)
+                        {
+                            gameInDb.TotalPlayTime += sessionDuration;
+                            db.SaveChanges();
+                        }
+                    }
+
+                    Application.Current.MainWindow.WindowState = WindowState.Normal;
+                    if(this.DataContext is MainViewModel vm)
+                    {
+                        vm.LoadGames();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -108,7 +143,8 @@ namespace GameLauncher.Views
             }
             else
             {
-                MessageBox.Show("Nie odnaleziono poprawnej ścieżki do pliku wykonywalnego (.exe).", "Brak pliku", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Nie odnaleziono poprawnej ścieżki do pliku wykonywalnego (.exe).", "Brak pliku", MessageBoxButton.OK, 
+                    MessageBoxImage.Warning);
             }
         }
 
