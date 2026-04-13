@@ -55,7 +55,7 @@ This is an educational/portfolio project created to learn:
 
 This project follows the **MVVM** pattern:
 
-```
+---
 GameLauncher/
 ├── Assets/          # Icons and images
 ├── Data/            # Database context
