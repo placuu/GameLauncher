@@ -56,14 +56,14 @@ This is an educational/portfolio project created to learn:
 This project follows the **MVVM** pattern:
 
 ---
-GameLauncher/
-├── Assets/          # Icons and images
-├── Data/            # Database context
-├── Models/          # Data models (Game, etc.)
-├── ViewModels/      # Business logic and data binding
-├── Views/           # XAML UI definitions
-├── Themes/          # Styles, colors, button themes
-└── App.xaml         # Application entry point
+**GameLauncher/**
+- `Assets/` — icons and images
+- `Data/` — database context
+- `Models/` — data models
+- `ViewModels/` — business logic and data binding
+- `Views/` — XAML UI definitions
+- `Themes/` — styles and button themes
+- `App.xaml` — application entry point
 
 ---
 
