@@ -1,24 +1,75 @@
-# Game Launcher & Library Manager
+# 🎮 Game Launcher & Library Manager
 
-A desktop application built with **WPF (Windows Presentation Foundation)** and **.NET** designed to organize and launch PC games. This project demonstrates the implementation of a modern UI, local file management, and persistent data storage.
+A desktop application built with WPF and .NET for organizing and launching your PC games — inspired by platforms like Steam and GOG Galaxy.
 
-## Features
+---
 
-* **Game Library Management** – Add, edit, and remove games from your local database.
-* **Persistent Storage** – Uses SQLite to keep your library saved between sessions.
-* **Time Tracking** – Real-time monitoring of "Time Played" for each launched title.
-* **Visual Progress** – Interactive progress bars and status indicators for game updates.
-* **Custom UI** – A dark-themed, modern interface inspired by popular gaming platforms.
+## 📌 About This Project
 
-## Built With
+This is an educational/portfolio project created to learn:
 
-* **C# / .NET** – Core application logic.
-* **WPF (XAML)** – Rich desktop user interface.
-* **Entity Framework Core** – Database management and ORM.
-* **SQLite** – Lightweight, serverless local database.
+- MVVM architecture in WPF
+- Local database management with Entity Framework Core
+- Process monitoring and event handling in C#
+- Building modern dark-themed desktop UIs
 
-## Key Learnings
+---
 
-1. **CRUD Operations** – Implementing Create, Read, Update, and Delete functionality within a desktop environment.
-2. **Event Handling** – Managing process starts and exits to track application usage time.
-3. **Data Binding** – Utilizing the MVVM (Model-View-ViewModel) pattern to sync the UI with underlying data models.
+## 🚀 Features
+
+- 📁 **Game Library Management** — Add, edit, and remove games from your local database
+- 💾 **Persistent Storage** — SQLite database keeps your library saved between sessions
+- ⏱️ **Time Tracking** — Real-time monitoring of "Time Played" for each launched title
+- 🎨 **Custom UI** — Dark-themed modern interface inspired by Steam and GOG Galaxy
+
+---
+
+## 💻 Requirements
+
+- Windows 10 / 11
+- .NET 8 SDK or higher
+- Visual Studio 2022 (recommended)
+
+---
+
+## 📖 How to Use
+
+1. Clone the repository
+2. Open solution in Visual Studio
+3. Build and run the project
+4. Add your games using the **Add Game** button
+5. Launch games directly from the library
+
+---
+
+## 🛠️ Technologies Used
+
+- C# / .NET
+- WPF (XAML)
+- Entity Framework Core
+- SQLite
+
+---
+
+## 🏗️ Architecture
+
+This project follows the **MVVM** pattern:
+
+```
+GameLauncher/
+├── Assets/          # Icons and images
+├── Data/            # Database context
+├── Models/          # Data models (Game, etc.)
+├── ViewModels/      # Business logic and data binding
+├── Views/           # XAML UI definitions
+├── Themes/          # Styles, colors, button themes
+└── App.xaml         # Application entry point
+
+---
+
+## 📚 What I Learned
+
+- Implementing CRUD operations in a desktop environment
+- Managing process start/exit events for time tracking
+- Data binding with the MVVM pattern
+- Working with Entity Framework Core and SQLite
